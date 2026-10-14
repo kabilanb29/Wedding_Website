@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A hand-painted wedding invitation for Aarav and Meera."
+    />
+    <title>Aarav &amp; Meera | Wedding Invitation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="book" aria-label="Wedding invitation">
+      <audio id="wedding-song" autoplay loop preload="auto">
+        <source src="assets/idicha-pacharisi.mp3" type="audio/mpeg" />
+      </audio>
+      <button class="music-toggle" id="music-toggle" type="button" aria-label="Play wedding music">
+        <span aria-hidden="true">♪</span>
+        <span class="music-toggle__label">Play music</span>
+      </button>
+
+      <div class="butterflies" aria-hidden="true">
+        <img class="butterfly butterfly--peach" src="assets/butterfly-peach.gif" alt="" />
+        <img class="butterfly butterfly--gold" src="assets/butterfly-gold.gif" alt="" />
+        <img class="butterfly butterfly--lilac" src="assets/butterfly-lilac.gif" alt="" />
+        <img class="butterfly butterfly--magenta" src="assets/butterfly-magenta.gif" alt="" />
+      </div>
+
+      <section class="page page--active" aria-label="Welcome">
+        <img src="assets/wedding-background.png" alt="" />
+        <div class="page__content page__content--welcome">
+          <p class="eyebrow">Together with their families</p>
+          <h1>A beautiful<br /><em>beginning</em></h1>
+          <div class="divider" aria-hidden="true"><span></span><i>✦</i><span></span></div>
+          <p class="intro">Please join us as we celebrate our love and begin forever.</p>
+          <p class="names">Aarav <span>&amp;</span> Meera</p>
+          <p class="date">Sunday, 14 December 2025</p>
+          <p class="location">Jaipur · Rajasthan</p>
+        </div>
+      </section>
+
+      <section class="page" aria-label="Ceremony">
+        <img src="assets/page-2.jpg" alt="" />
+        <img class="couple-art couple-art--ceremony" src="assets/couple-garlands.png" alt="" aria-hidden="true" />
+        <img class="page-butterfly page-butterfly--ceremony" src="assets/butterfly-purple.gif" alt="" aria-hidden="true" />
+        <div class="page__content page__content--ceremony">
+          <p class="eyebrow">The ceremony</p>
+          <h2>In the presence<br />of the divine</h2>
+          <div class="divider" aria-hidden="true"><span></span><i>✦</i><span></span></div>
+          <p class="intro">Join us for blessings, music, and the first steps of our forever.</p>
+        </div>
+      </section>
+
+      <section class="page" aria-label="Wedding details">
+        <img src="assets/page-3.jpg" alt="" />
+        <img class="couple-art couple-art--details" src="assets/couple-namaste.png" alt="" aria-hidden="true" />
+        <img class="page-butterfly page-butterfly--details" src="assets/butterfly-blue.gif" alt="" aria-hidden="true" />
+        <div class="page__content page__content--details">
+          <p class="eyebrow">Save the date</p>
+          <h2>Mark your<br />calendars</h2>
+          <div class="detail-card scratch-card" aria-label="Scratch to reveal the wedding date">
+            <div class="scratch-card__reveal">
+              <p><strong>Sunday, 14 December 2025</strong><span>Wedding ceremony · 6:00 PM</span></p>
+              <p><strong>The Royal Courtyard</strong><span>Jaipur, Rajasthan</span></p>
+            </div>
+            <canvas class="scratch-card__canvas" aria-label="Scratch here to reveal the wedding date"></canvas>
+            <span class="scratch-card__hint">✦ Scratch to reveal ✦</span>
+            <div class="flower-burst" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" aria-label="Our story">
+        <img src="assets/our-story.png" alt="" />
+        <div class="page__content page__content--story">
+          <p class="eyebrow">Our story</p>
+          <h2>Two hearts,<br />one journey</h2>
+          <p class="intro">From a chance hello to a lifetime of shared moments, we are so happy you are part of our story.</p>
+        </div>
+      </section>
+
+      <section class="page" aria-label="Celebration">
+        <img src="assets/page-5.jpg" alt="" />
+        <img class="couple-art couple-art--celebration" src="assets/couple-holding-hands.png" alt="" aria-hidden="true" />
+        <img class="page-butterfly page-butterfly--celebration" src="assets/butterfly-pink.gif" alt="" aria-hidden="true" />
+        <div class="page__content page__content--celebration">
+          <p class="eyebrow">Let the celebrations begin</p>
+          <h2>Come celebrate<br />with us</h2>
+          <p class="intro">Dress in your brightest festive colours and bring your dancing feet.</p>
+        </div>
+      </section>
+
+      <section class="page" aria-label="A special invitation">
+        <img src="assets/page-6.png" alt="" />
+        <div class="page__content page__content--special">
+          <p class="eyebrow">With love and blessings</p>
+          <h2>You are<br />specially invited</h2>
+          <div class="divider" aria-hidden="true"><span></span><i>✦</i><span></span></div>
+          <p class="intro">Your presence will make our day complete.</p>
+        </div>
+      </section>
+
+      <section class="page" aria-label="Closing message">
+        <img src="assets/page-7.png" alt="" />
+        <img class="couple-art couple-art--closing" src="assets/couple-traditional.png" alt="" aria-hidden="true" />
+        <img class="page-butterfly page-butterfly--closing" src="assets/butterfly-green.gif" alt="" aria-hidden="true" />
+        <div class="page__content page__content--closing">
+          <p class="eyebrow">A new chapter begins</p>
+          <h2>We cannot wait<br />to see you</h2>
+          <p class="intro">With grateful hearts,<br />Aarav &amp; Meera</p>
+          <a class="button" href="mailto:rsvp@example.com">RSVP <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
