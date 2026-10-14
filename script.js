@@ -12,6 +12,14 @@ function startMusic() {
   audio.play().then(() => updateMusicControl(true)).catch(() => updateMusicControl(false));
 }
 
+function startMusicFromFirstInteraction() {
+  if (audio.paused) startMusic();
+  document.removeEventListener("pointerdown", startMusicFromFirstInteraction);
+  document.removeEventListener("keydown", startMusicFromFirstInteraction);
+  document.removeEventListener("wheel", startMusicFromFirstInteraction);
+  document.removeEventListener("touchstart", startMusicFromFirstInteraction);
+}
+
 musicToggle.addEventListener("click", () => {
   if (audio.paused) {
     startMusic();
@@ -25,6 +33,10 @@ audio.addEventListener("ended", () => updateMusicControl(false));
 audio.addEventListener("play", () => updateMusicControl(true));
 audio.addEventListener("pause", () => updateMusicControl(false));
 
+document.addEventListener("pointerdown", startMusicFromFirstInteraction, { once: true });
+document.addEventListener("keydown", startMusicFromFirstInteraction, { once: true });
+document.addEventListener("wheel", startMusicFromFirstInteraction, { once: true, passive: true });
+document.addEventListener("touchstart", startMusicFromFirstInteraction, { once: true, passive: true });
 startMusic();
 
 const scratchCard = document.querySelector(".scratch-card");
