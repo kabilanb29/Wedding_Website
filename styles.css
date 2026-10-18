@@ -9,6 +9,9 @@
 html { scroll-behavior: smooth; }
 body { margin: 0; overflow-x: hidden; background: var(--cream); color: var(--ink); font-family: "Manrope", sans-serif; }
 a { color: inherit; text-decoration: none; }
+.music-toggle { position: fixed; z-index: 9; right: max(1rem, calc(50% - 199px)); bottom: 1rem; display: inline-flex; align-items: center; gap: .45rem; padding: .65rem .8rem; border: 1px solid #f8e7b1aa; border-radius: 999px; background: #153c2bdd; color: #f8e7b1; cursor: pointer; font: .58rem Cinzel, serif; letter-spacing: .08em; text-transform: uppercase; }
+.music-icon { font-size: 1.05rem; line-height: 1; }
+.music-toggle.is-playing .music-icon { animation: music-bounce .8s ease-in-out infinite alternate; }
 .scroll-progress { position: fixed; z-index: 10; top: 0; left: 0; width: 0; height: 3px; background: var(--gold); }
 .site-header { position: fixed; z-index: 5; top: 0; width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.3rem clamp(1.2rem, 5vw, 5rem); color: white; background: linear-gradient(#15271999, transparent); }
 .brand { font: 2rem "Allura", cursive; color: #f8e7b1; }
@@ -60,6 +63,7 @@ h2 { margin: 0; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 600; line-heig
 footer { padding: 2rem; background: #102c20; color: #c8d5c5; text-align: center; } footer span { color: #f8e7b1; font: 2rem Allura, cursive; } footer p { font-size: .7rem; letter-spacing: .1em; }
 .reveal { opacity: 0; transform: translateY(2rem); transition: opacity .8s ease, transform .8s ease; }.reveal.visible { opacity: 1; transform: none; }
 @keyframes scroll { 50% { opacity: .3; transform: translateY(.6rem); } } @keyframes heartbeat { 50% { transform: translateX(-50%) scale(1.12); } } @keyframes pulse { to { opacity: 0; transform: scale(1.7); } }
+@keyframes music-bounce { to { transform: translateY(-2px) rotate(8deg); } }
 @media (max-width: 700px) {
   nav { display: none; }
   .site-header { padding: 1rem 1.2rem; }
