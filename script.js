@@ -3,34 +3,95 @@
 const progress = document.querySelector(".scroll-progress");
 const revealElements = document.querySelectorAll(".reveal");
 const music = document.querySelector("#wedding-music");
-const musicToggle = document.querySelector(".music-toggle");
-const musicLabel = document.querySelector(".music-label");
-
-const updateMusicButton = (isPlaying) => {
-  musicToggle.classList.toggle("is-playing", isPlaying);
-  musicToggle.setAttribute("aria-pressed", String(isPlaying));
-  musicToggle.setAttribute("aria-label", isPlaying ? "Pause wedding music" : "Play wedding music");
-  musicLabel.textContent = isPlaying ? "Music on" : "Play music";
-};
+const welcomeScreen = document.querySelector(".welcome-screen");
+const openInvitation = document.querySelector(".open-invitation");
+const scratchCard = document.querySelector(".scratch-card");
+const scratchCanvas = document.querySelector(".scratch-surface");
+const scratchContext = scratchCanvas.getContext("2d");
+let scratching = false;
+let scratchAmount = 0;
 
 const playMusic = () => {
   music.play()
-    .then(() => updateMusicButton(true))
-    .catch(() => updateMusicButton(false));
+    .catch(() => {});
 };
 
-musicToggle.addEventListener("click", () => {
-  if (music.paused) {
-    playMusic();
-  } else {
-    music.pause();
-    updateMusicButton(false);
+const sizeScratchCard = () => {
+  const bounds = scratchCard.getBoundingClientRect();
+  const scale = window.devicePixelRatio || 1;
+  scratchCanvas.width = bounds.width * scale;
+  scratchCanvas.height = bounds.height * scale;
+  scratchCanvas.style.width = `${bounds.width}px`;
+  scratchCanvas.style.height = `${bounds.height}px`;
+  scratchContext.setTransform(scale, 0, 0, scale, 0, 0);
+  scratchContext.fillStyle = "#a17a2b";
+  scratchContext.fillRect(0, 0, bounds.width, bounds.height);
+  scratchContext.fillStyle = "#d5ad5e";
+  scratchContext.font = "600 10px Cinzel, serif";
+  scratchContext.textAlign = "center";
+  scratchContext.fillText("SCRATCH HERE", bounds.width / 2, bounds.height / 2 + 4);
+};
+
+const createScratchEffect = (x, y) => {
+  const sparkle = document.createElement("span");
+  sparkle.className = "scratch-sparkle";
+  sparkle.textContent = Math.random() > .5 ? "✦" : "✧";
+  sparkle.style.left = `${x}px`;
+  sparkle.style.top = `${y}px`;
+  scratchCard.append(sparkle);
+  window.setTimeout(() => sparkle.remove(), 850);
+};
+
+const createFlowerEffect = () => {
+  const flower = document.createElement("span");
+  flower.className = "scratch-flower";
+  flower.textContent = Math.random() > .5 ? "✿" : "❀";
+  flower.style.left = `${Math.random() * 100}%`;
+  flower.style.animationDelay = `${Math.random() * .25}s`;
+  scratchCard.append(flower);
+  window.setTimeout(() => flower.remove(), 1800);
+};
+
+const scratch = (event) => {
+  if (!scratching) return;
+  const bounds = scratchCanvas.getBoundingClientRect();
+  const point = event.touches ? event.touches[0] : event;
+  const x = point.clientX - bounds.left;
+  const y = point.clientY - bounds.top;
+  scratchContext.globalCompositeOperation = "destination-out";
+  scratchContext.beginPath();
+  scratchContext.arc(x, y, 18, 0, Math.PI * 2);
+  scratchContext.fill();
+  scratchAmount += 1;
+  if (scratchAmount % 3 === 0) {
+    createScratchEffect(x, y);
+    createFlowerEffect();
   }
+  if (scratchAmount > 28) {
+    scratchCard.classList.add("revealed");
+    scratchContext.clearRect(0, 0, bounds.width, bounds.height);
+  }
+};
+
+scratchCanvas.addEventListener("pointerdown", (event) => {
+  scratching = true;
+  scratchCanvas.setPointerCapture(event.pointerId);
+  scratch(event);
+});
+scratchCanvas.addEventListener("pointermove", scratch);
+scratchCanvas.addEventListener("pointerup", () => { scratching = false; });
+scratchCanvas.addEventListener("pointercancel", () => { scratching = false; });
+window.addEventListener("resize", sizeScratchCard);
+sizeScratchCard();
+
+openInvitation.addEventListener("click", () => {
+  playMusic();
+  document.body.classList.add("invitation-open");
+  welcomeScreen.remove();
 });
 
-window.addEventListener("load", playMusic, { once: true });
 document.addEventListener("pointerdown", (event) => {
-  if (event.target !== musicToggle && !musicToggle.contains(event.target)) {
+  if (document.body.classList.contains("invitation-open")) {
     playMusic();
   }
 }, { once: true });

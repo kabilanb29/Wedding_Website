@@ -11,13 +11,21 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <audio id="wedding-music" autoplay loop preload="auto">
+    <section class="welcome-screen" aria-label="Wedding invitation welcome">
+      <img src="entry-temple.jpg" alt="Brihadishvara Temple" />
+      <div class="welcome-shade"></div>
+      <div class="welcome-copy">
+        <p class="welcome-kicker">॥ Shree Ganesha Namaha ॥</p>
+        <p class="welcome-intro">Welcome to the wedding invitation of</p>
+        <h1>Srini <span>weds</span> Jaya</h1>
+        <button class="open-invitation" type="button">
+          Open invitation <span>→</span>
+        </button>
+      </div>
+    </section>
+    <audio id="wedding-music" loop preload="auto">
       <source src="kummi-adi-kummi.mp3" type="audio/mpeg" />
     </audio>
-    <button class="music-toggle" type="button" aria-label="Play wedding music" aria-pressed="false">
-      <span class="music-icon">♫</span>
-      <span class="music-label">Play music</span>
-    </button>
     <div class="scroll-progress" aria-hidden="true"></div>
     <header class="site-header">
       <a class="brand" href="#home" aria-label="Srinivas and Jayasheeli home">S &amp; J</a>
@@ -36,8 +44,7 @@
           <p class="eyebrow">॥ Shree Ganesha Namaha ॥</p>
           <p class="intro">With the blessings of<br />our families</p>
           <p class="invite">We invite you to celebrate<br />the beginning of our forever</p>
-          <h1>Srinivas <span>&amp;</span> Jayasheeli</h1>
-          <p class="hero-date">Friday <b>30</b> October 2026</p>
+          <h1>Srini <span>&amp;</span> Jaya</h1>
           <a class="scroll-cue" href="#location"><span></span>Scroll to our story</a>
         </div>
       </section>
@@ -66,7 +73,6 @@
         <div class="event-grid">
           <article class="event-card reveal">
             <div class="event-icon">✦</div>
-            <p class="event-day">Friday, 30 October 2026</p>
             <h3>The Wedding</h3>
             <p class="event-time">9:00 in the morning</p>
             <p>Gurubala Thirumana Mandapam<br />Vickramasingapuram, Papanasam</p>
@@ -82,12 +88,22 @@
       </section>
 
       <section class="location section" id="location">
+        <div class="scratch-wrap reveal">
+          <p class="scratch-hint">Scratch to reveal our special date</p>
+          <div class="scratch-card">
+            <div class="scratch-date">
+              <span>Save the date</span>
+              <strong>30 October 2026</strong>
+              <small>Friday · 9:00 AM</small>
+            </div>
+            <canvas class="scratch-surface" aria-label="Scratch this card to reveal the wedding date"></canvas>
+          </div>
+        </div>
         <div class="location-copy reveal">
           <p class="eyebrow">Find your way to us</p>
           <h2>Meet us at<br />the<br />mandapam</h2>
           <div class="mobile-summary">
             <p>Two hearts, one journey.</p>
-            <strong>Friday · 30 October 2026 · 9:00 AM</strong>
           </div>
           <p>Follow the pin and join us for a morning of love, laughter and new beginnings.</p>
           <a class="button" href="https://www.google.com/maps/search/?api=1&query=Gurubala+Thirumana+Mandapam+Vickramasingapuram" target="_blank" rel="noreferrer">Open live location <span>↗</span></a>
