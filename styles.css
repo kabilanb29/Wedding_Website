@@ -6,7 +6,7 @@
 }
 
 * { box-sizing: border-box; }
-html { min-height: 100%; width: 100%; scroll-behavior: smooth; }
+html { min-height: 100%; width: 100%; scroll-behavior: auto; }
 body { margin: 0; overflow-x: hidden; background: var(--cream); color: var(--ink); font-family: "Manrope", sans-serif; }
 a { color: inherit; text-decoration: none; }
 .welcome-screen { position: fixed; z-index: 20; top: 0; bottom: 0; left: 50%; width: min(100%, 430px); display: grid; place-items: center; overflow: hidden; background: #142c20; color: #f8e7b1; transform: translateX(-50%); }
@@ -198,10 +198,6 @@ h1 span {
 .location {
   min-height: 100svh;
   scroll-snap-align: start;
-}
-
-html {
-  scroll-snap-type: y proximity;
 }
 
 .story {
@@ -574,7 +570,7 @@ html {
   position: relative;
   width: 100%;
   height: 300vh;
-  overflow: clip;
+  overflow: visible;
   background: #17251c;
   display: none;
 }
@@ -582,11 +578,13 @@ html {
 .animation-container {
   position: sticky;
   top: 0;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   height: 100svh;
   overflow: hidden;
   isolation: isolate;
+  --split-photo-position: 78% center;
+  background: url("hero-background.jpg") center center / cover no-repeat;
 }
 
 .bride-wrapper,
@@ -601,8 +599,9 @@ html {
 
 .bride-wrapper,
 .groom-wrapper {
-  width: 50vw;
+  width: 50%;
   z-index: 1;
+  background: transparent;
 }
 
 .bride-wrapper {
@@ -629,20 +628,26 @@ html {
   object-fit: cover;
 }
 
+.final-wrapper img {
+  object-position: 28% center;
+}
+
 .bride-wrapper img,
 .groom-wrapper img {
+  position: relative;
   width: 200%;
   max-width: none;
+  transform: none;
 }
 
 .bride-wrapper img {
-  object-position: left center;
+  left: 0;
+  object-position: var(--split-photo-position);
 }
 
 .groom-wrapper img {
-  position: relative;
   left: -100%;
-  object-position: right center;
+  object-position: var(--split-photo-position);
 }
 
 .scroll-hero-overlay {

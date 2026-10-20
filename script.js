@@ -1,5 +1,9 @@
 "use strict";
 
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
 const progress = document.querySelector(".scroll-progress");
 const revealElements = document.querySelectorAll(".reveal");
 const music = document.querySelector("#wedding-music");
@@ -86,8 +90,16 @@ sizeScratchCard();
 
 openInvitation.addEventListener("click", () => {
   playMusic();
+  window.scrollTo(0, 0);
   document.body.classList.add("invitation-open");
   welcomeScreen.remove();
+  openInvitation.blur();
+  window.requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+    if (window.ScrollTrigger) {
+      window.ScrollTrigger.refresh();
+    }
+  });
 });
 
 document.addEventListener("pointerdown", (event) => {
@@ -119,15 +131,14 @@ const scrollHero = document.querySelector(".scroll-hero");
 const brideWrapper = document.querySelector(".bride-wrapper");
 const groomWrapper = document.querySelector(".groom-wrapper");
 const finalWrapper = document.querySelector(".final-wrapper");
-let scrollHeroMedia;
 
 const initScrollHero = () => {
   if (!scrollHero || !brideWrapper || !groomWrapper || !finalWrapper) return;
 
   gsap.registerPlugin(ScrollTrigger);
-  scrollHeroMedia = gsap.matchMedia();
+  const mobileMatchMedia = gsap.matchMedia();
 
-  scrollHeroMedia.add("(max-width: 700px)", () => {
+  mobileMatchMedia.add("(max-width: 700px)", () => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       gsap.set([brideWrapper, groomWrapper], { xPercent: 0 });
       gsap.set(finalWrapper, { opacity: 1 });
@@ -136,9 +147,10 @@ const initScrollHero = () => {
 
     gsap.set(brideWrapper, { xPercent: -100 });
     gsap.set(groomWrapper, { xPercent: 100 });
+    gsap.set(finalWrapper, { opacity: 0 });
 
     gsap.timeline({
-      defaults: { ease: "none" },
+      defaults: { ease: "power2.inOut" },
       scrollTrigger: {
         trigger: scrollHero,
         start: "top top",
@@ -149,12 +161,12 @@ const initScrollHero = () => {
     })
       .to([brideWrapper, groomWrapper], {
         xPercent: 0,
-        duration: 0.62
+        duration: 0.72
       })
       .to(finalWrapper, {
         opacity: 1,
         duration: 0.28
-      }, 0.66);
+      }, 0.76);
   });
 };
 
@@ -163,11 +175,3 @@ if (window.gsap && window.ScrollTrigger) {
 } else {
   console.error("The scroll hero could not initialize because GSAP or ScrollTrigger failed to load.");
 }
-
-openInvitation.addEventListener("click", () => {
-  window.requestAnimationFrame(() => {
-    if (scrollHeroMedia && window.ScrollTrigger) {
-      ScrollTrigger.refresh();
-    }
-  });
-});
