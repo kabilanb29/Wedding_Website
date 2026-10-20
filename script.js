@@ -114,3 +114,60 @@ const observer = new IntersectionObserver(
 revealElements.forEach((element) => observer.observe(element));
 window.addEventListener("scroll", updateProgress, { passive: true });
 updateProgress();
+
+const scrollHero = document.querySelector(".scroll-hero");
+const brideWrapper = document.querySelector(".bride-wrapper");
+const groomWrapper = document.querySelector(".groom-wrapper");
+const finalWrapper = document.querySelector(".final-wrapper");
+let scrollHeroMedia;
+
+const initScrollHero = () => {
+  if (!scrollHero || !brideWrapper || !groomWrapper || !finalWrapper) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+  scrollHeroMedia = gsap.matchMedia();
+
+  scrollHeroMedia.add("(max-width: 700px)", () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      gsap.set([brideWrapper, groomWrapper], { xPercent: 0 });
+      gsap.set(finalWrapper, { opacity: 1 });
+      return;
+    }
+
+    gsap.set(brideWrapper, { xPercent: -100 });
+    gsap.set(groomWrapper, { xPercent: 100 });
+
+    gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: {
+        trigger: scrollHero,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1,
+        invalidateOnRefresh: true
+      }
+    })
+      .to([brideWrapper, groomWrapper], {
+        xPercent: 0,
+        duration: 0.62
+      })
+      .to(finalWrapper, {
+        opacity: 1,
+        duration: 0.28
+      }, 0.66);
+  });
+};
+
+if (window.gsap && window.ScrollTrigger) {
+  initScrollHero();
+} else {
+  console.error("The scroll hero could not initialize because GSAP or ScrollTrigger failed to load.");
+}
+
+openInvitation.addEventListener("click", () => {
+  window.requestAnimationFrame(() => {
+    if (scrollHeroMedia && window.ScrollTrigger) {
+      ScrollTrigger.refresh();
+    }
+  });
+});
