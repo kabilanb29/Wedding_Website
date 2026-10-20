@@ -584,7 +584,7 @@ h1 span {
   overflow: hidden;
   isolation: isolate;
   --split-photo-position: 78% center;
-  background: url("hero-background.jpg") center center / cover no-repeat;
+  background: url("hero-background-upscaled.png") center center / cover no-repeat;
 }
 
 .bride-wrapper,
