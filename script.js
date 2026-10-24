@@ -5,6 +5,7 @@ if ("scrollRestoration" in history) {
 }
 
 const progress = document.querySelector(".scroll-progress");
+const scrollTopButton = document.querySelector(".scroll-top");
 const revealElements = document.querySelectorAll(".reveal");
 const music = document.querySelector("#wedding-music");
 const welcomeScreen = document.querySelector(".welcome-screen");
@@ -111,7 +112,20 @@ document.addEventListener("pointerdown", (event) => {
 const updateProgress = () => {
   const pageHeight = document.documentElement.scrollHeight - window.innerHeight;
   progress.style.width = `${pageHeight > 0 ? (window.scrollY / pageHeight) * 100 : 0}%`;
+
+  if (scrollTopButton) {
+    const shouldShowButton = window.scrollY > 400;
+    scrollTopButton.classList.toggle("visible", shouldShowButton);
+  }
 };
+
+scrollTopButton?.addEventListener("click", () => {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  window.scrollTo({
+    top: 0,
+    behavior: prefersReducedMotion ? "auto" : "smooth"
+  });
+});
 
 const observer = new IntersectionObserver(
   (entries) => entries.forEach((entry) => {
